@@ -37,7 +37,17 @@ void	ft_swap_rule(t_stack **top, t_stack **tail)
 
 void	ft_push_rule();
 
-void	ft_rotate_rule();
+void	ft_rotate_rule(t_stack **top, t_stack **tail)
+{
+	if (!(*top) || !((*top)->down))
+		return ;
+	*top = (*top)->down;//
+	(*top)->up->up = *tail;
+	(*top)->up->down = NULL;
+	*tail = (*top)->up;
+	(*top)->up = NULL;
+	(*tail)->up->down = *tail;
+}
 
 void	ft_reverse_rotate_rule();
 
@@ -49,7 +59,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 0; i++)
+    for (int i = 0; i < 2; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
@@ -62,7 +72,7 @@ int    main()
 	ft_print_stack2(top, "a");
 
 	printf("###################################\n");
-	ft_swap_rule(&top, &tail);
+	ft_rotate_rule(&top, &tail);
 	ft_print_from_top_to_tail(top);
 	ft_print_from_tail_to_top(tail);
 	ft_print_stack2(top, "a");
