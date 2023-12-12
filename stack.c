@@ -17,6 +17,14 @@ void    ft_push(t_stack **top, t_stack **tail, int *value)
     *top = new_node;
 }
 
+void	ft_swap_rule();
+
+void	ft_push_rule();
+
+void	ft_rotate_rule();
+
+void	ft_reverse_rotate_rule();
+
 int    main()
 {
     t_stack    *top;
@@ -25,7 +33,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 3; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
@@ -36,6 +44,6 @@ int    main()
 
 	ft_print_from_top_to_tail(top);
 	ft_print_from_tail_to_top(tail);
-	ft_print_stack(top, "a");
+	ft_print_stack2(top, "a");
 	return (0);
 }

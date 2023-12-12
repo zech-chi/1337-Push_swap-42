@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:00:34 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/12 16:03:45 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:23:38 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ typedef struct s_stack
 void	ft_print_from_top_to_tail(t_stack *top);
 void	ft_print_from_tail_to_top(t_stack *tail);
 void	ft_print_stack(t_stack *top, char *name);
+void	ft_print_stack2(t_stack *top, char *name);
+
 
 #endif

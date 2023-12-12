@@ -31,3 +31,27 @@ void	ft_print_stack(t_stack *top, char *name)
 	}
 	printf("\n-\n%s\n", name);
 }
+
+void	ft_print_stack2(t_stack *top, char *name)
+{
+	int	counter;
+
+	if (!top)
+	{
+		printf("stack %s is empty!!!\n", name);
+		return ;
+	}
+	counter = 0;
+	printf("\n");
+	while (top)
+	{
+		printf("\n|  %d  |", *(top->value));
+		if (counter == 0)
+			printf(" top");
+		counter++;
+		top = top->down;
+	}
+	printf(" tail\n");
+	printf("-------\t\n");
+	printf("stack: %s\n", name);
+}
