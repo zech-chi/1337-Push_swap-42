@@ -23,10 +23,10 @@ void	ft_swap_rule(t_stack **top, t_stack **tail)
 
 	if (!(*top) || !((*top)->down))
 		return ;
-	new_top	= (*top)->down;//
-	(*top)->down = new_top->down;//
-	(*top)->up = new_top;//
-	if (new_top->down)//
+	new_top	= (*top)->down;
+	(*top)->down = new_top->down;
+	(*top)->up = new_top;
+	if (new_top->down)
 		new_top->down->up = *top;
 	else
 		*tail = *top;
