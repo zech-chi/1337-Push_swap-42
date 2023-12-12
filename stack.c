@@ -21,7 +21,7 @@ void	ft_swap_rule(t_stack **top, t_stack **tail)
 {
 	t_stack	*new_top;
 
-	if (!((*top)->down))
+	if (!(*top) || !((*top)->down))
 		return ;
 	new_top	= (*top)->down;//
 	(*top)->down = new_top->down;//
@@ -49,7 +49,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 0; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
