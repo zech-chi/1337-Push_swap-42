@@ -1,15 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "push_swap.h"
 
-typedef struct s_stack
-{
-    int               *value;
-    struct s_stack    *up;
-    struct s_stack    *down;
-}    t_stack;
-
-
-void    ft_push(t_stack **top, t_stack **tail,int *value)
+void    ft_push(t_stack **top, t_stack **tail, int *value)
 {
     t_stack    *new_node;
 
@@ -26,28 +17,6 @@ void    ft_push(t_stack **top, t_stack **tail,int *value)
     *top = new_node;
 }
 
-void	ft_print_from_top_to_tail(t_stack *top)
-{
-	printf("top --> ");
-	while (top)
-	{
-		printf("%d --> ", *(top->value));
-		top = top->down;
-	}
-	printf("NULL\n");
-}
-
-void	ft_print_from_tail_to_top(t_stack *tail)
-{
-	printf("tail --> ");
-	while (tail)
-	{
-		printf("%d --> ", *(tail->value));
-		tail = tail->up;
-	}
-	printf("NULL\n");
-}
-
 int    main()
 {
     t_stack    *top;
@@ -56,7 +25,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 7; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
@@ -67,5 +36,6 @@ int    main()
 
 	ft_print_from_top_to_tail(top);
 	ft_print_from_tail_to_top(tail);
+	ft_print_stack(top, "a");
 	return (0);
 }
