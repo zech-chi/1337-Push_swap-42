@@ -17,7 +17,23 @@ void    ft_push(t_stack **top, t_stack **tail, int *value)
     *top = new_node;
 }
 
-void	ft_swap_rule();
+void	ft_swap_rule(t_stack **top, t_stack **tail)
+{
+	t_stack	*new_top;
+
+	if (!((*top)->down))
+		return ;
+	new_top	= (*top)->down;//
+	(*top)->down = new_top->down;//
+	(*top)->up = new_top;//
+	if (new_top->down)//
+		new_top->down->up = *top;
+	else
+		*tail = *top;
+	new_top->down = *top;
+	new_top->up = NULL;
+	*top = new_top;
+}
 
 void	ft_push_rule();
 
@@ -33,7 +49,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 10; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
@@ -41,7 +57,12 @@ int    main()
       *a = i;
       ft_push(&top, &tail, a);
     }
+	ft_print_from_top_to_tail(top);
+	ft_print_from_tail_to_top(tail);
+	ft_print_stack2(top, "a");
 
+	printf("###################################\n");
+	ft_swap_rule(&top, &tail);
 	ft_print_from_top_to_tail(top);
 	ft_print_from_tail_to_top(tail);
 	ft_print_stack2(top, "a");
