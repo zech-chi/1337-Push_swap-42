@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 22:08:25 by zech-chi          #+#    #+#             */
+/*   Updated: 2023/12/12 23:02:31 by zech-chi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void    ft_push(t_stack **top, t_stack **tail, int *value)
@@ -34,8 +46,28 @@ void	ft_swap_rule(t_stack **top, t_stack **tail)
 	new_top->up = NULL;
 	*top = new_top;
 }
+// pop from stack1 and push in stack2
+void	ft_push_rule(t_stack **top1, t_stack **tail1, t_stack **top2, t_stack **tail2)
+{
+	t_stack	*prev_top1;
 
-void	ft_push_rule();
+	if (!(*top1))
+		return ;
+	prev_top1 = *top1;
+	*top1 = (*top1)->down;
+	if (*top2)
+	{
+		prev_top1->down = *top2;
+		(*top2)->up = prev_top1;
+	}
+	else
+	{
+		*tail2 = prev_top1;
+		prev_top1->down = NULL;
+	}
+	*top2 = prev_top1;
+	(*top1)->up = NULL;
+}
 
 void	ft_rotate_rule(t_stack **top, t_stack **tail)
 {
@@ -69,7 +101,7 @@ int    main()
 
     top = NULL;
     tail = NULL;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
     {
       a = malloc(sizeof(int));
       if (!a)
