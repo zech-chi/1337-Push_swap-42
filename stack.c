@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 22:08:25 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/12 23:02:31 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:13:00 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 void    ft_push(t_stack **top, t_stack **tail, int *value)
 {
-    t_stack    *new_node;
+	t_stack	*new_node;
 
-    new_node = (t_stack *)malloc(sizeof(t_stack));
-    if (!new_node || !value)
-        return ;
-    new_node->value = value;
-    new_node->up = NULL;
-    new_node->down = *top;
-    if (*top)
-      (*top)->up = new_node;
-    if (!(*tail))
-      *tail = new_node;
-    *top = new_node;
+	if (!value)
+		return ;
+	new_node = (t_stack *)malloc(sizeof(t_stack));
+	if (!new_node)
+		return ;
+	new_node->value = value;
+	new_node->up = NULL;
+	new_node->down = *top;
+	if (*top)
+		(*top)->up = new_node;
+	if (!(*tail))
+		*tail = new_node;
+	*top = new_node;
 }
 
 void	ft_swap_rule(t_stack **top, t_stack **tail)
@@ -66,7 +68,10 @@ void	ft_push_rule(t_stack **top1, t_stack **tail1, t_stack **top2, t_stack **tai
 		prev_top1->down = NULL;
 	}
 	*top2 = prev_top1;
-	(*top1)->up = NULL;
+	if (*top1)
+		(*top1)->up = NULL;
+	else
+		*tail1 = NULL;
 }
 
 void	ft_rotate_rule(t_stack **top, t_stack **tail)
