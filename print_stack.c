@@ -38,7 +38,7 @@ void	ft_print_stack2(t_stack *top, char *name)
 
 	if (!top)
 	{
-		printf("stack %s is empty!!!\n", name);
+		printf("stack: %s is empty!!!\n\n", name);
 		return ;
 	}
 	counter = 0;
@@ -53,5 +53,5 @@ void	ft_print_stack2(t_stack *top, char *name)
 	}
 	printf(" tail\n");
 	printf("-------\t\n");
-	printf("stack: %s\n", name);
+	printf("stack: %s\n\n", name);
 }

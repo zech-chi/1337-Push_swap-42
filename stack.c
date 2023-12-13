@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 22:08:25 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/13 16:13:00 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:49:46 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,64 @@ void	ft_reverse_rotate_rule(t_stack **top, t_stack **tail)
 	(*tail)->down = NULL;
 }
 
-int    main()
+int	main()
 {
-    t_stack    *top;
-    t_stack    *tail;
-    int *a;
+	//stack_a
+	t_stack	*top_a = NULL;
+	t_stack	*tail_a = NULL;
+	//stack_b
+	t_stack	*top_b = NULL;
+	t_stack	*tail_b = NULL;
+	//elements
+	int	tab[6] = {8, 5, 6, 3, 1, 2};
+	int	*value;
 
-    top = NULL;
-    tail = NULL;
-    for (int i = 0; i < 2; i++)
-    {
-      a = malloc(sizeof(int));
-      if (!a)
-        return (0);
-      *a = i;
-      ft_push(&top, &tail, a);
-    }
-	ft_print_from_top_to_tail(top);
-	ft_print_from_tail_to_top(tail);
-	ft_print_stack2(top, "a");
-
-	printf("###################################\n");
-	ft_reverse_rotate_rule(&top, &tail);
-	ft_print_from_top_to_tail(top);
-	ft_print_from_tail_to_top(tail);
-	ft_print_stack2(top, "a");
+	for (int i = 0; i < 6; i++)
+	{
+		value = (int *)malloc(sizeof(int));
+		if (!value)
+			break;
+		*value = tab[i];
+		ft_push(&top_a, &tail_a, value);
+	}
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec sa:
+	ft_swap_rule(&top_a, &top_b);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec pb pb pb:
+	ft_push_rule(&top_a, &tail_a, &top_b, &tail_b);
+	ft_push_rule(&top_a, &tail_a, &top_b, &tail_b);
+	ft_push_rule(&top_a, &tail_a, &top_b, &tail_b);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec ra rb (equiv. to rr):
+	ft_rotate_rule(&top_a, &tail_a);
+	ft_rotate_rule(&top_b, &tail_b);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec rra rrb (equiv. to rrr):
+	ft_reverse_rotate_rule(&top_a, &tail_a);
+	ft_reverse_rotate_rule(&top_b, &tail_b);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec sa:
+	ft_swap_rule(&top_a, &tail_a);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
+	//Exec pa pa pa:
+	ft_push_rule(&top_b, &tail_b, &top_a, &tail_a);
+	ft_push_rule(&top_b, &tail_b, &top_a, &tail_a);
+	ft_push_rule(&top_b, &tail_b, &top_a, &tail_a);
+	ft_print_stack2(top_a, "a");
+	ft_print_stack2(top_b, "b");
+	printf("***************************************************************************\n");
 	return (0);
 }
