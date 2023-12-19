@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:00:34 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/18 23:23:39 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/19 21:26:39 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,15 @@ void	ft_print_stack2(t_stack *top, char *name);
 
 // must implemted 
 // int	ft_is_stack_already_sorted;
+
+//pushinstack
+void	ft_push(t_stack **top, t_stack **tail, int *value);
+
+//rules
+void	ft_swap_rule(t_stack **top, t_stack **tail);
+void	ft_push_rule(t_stack **top1, t_stack **tail1, t_stack **top2, t_stack **tail2);
+void	ft_rotate_rule(t_stack **top, t_stack **tail);
+void	ft_reverse_rotate_rule(t_stack **top, t_stack **tail);
+
 
 #endif

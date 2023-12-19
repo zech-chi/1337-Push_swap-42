@@ -6,18 +6,18 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 22:08:25 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/18 23:24:50 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/19 22:27:15 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_push(t_stack **top, t_stack **tail, int *value)
+void	ft_push(t_stack **top, t_stack **tail, int *value)
 {
 	t_stack	*new_node;
 
 	if (!value)
-		return ;
+		return ;m 
 	new_node = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_node)
 		return ;
