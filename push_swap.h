@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:00:34 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/19 21:26:39 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/20 04:37:17 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ typedef struct s_stack
     struct s_stack	*down;
 }	t_stack;
 
+// utils
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
+int	ft_strcmp(char *s1, char *s2);
 
 void	ft_print_from_top_to_tail(t_stack *top);
 void	ft_print_from_tail_to_top(t_stack *tail);

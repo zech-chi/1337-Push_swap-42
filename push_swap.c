@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:02:38 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/20 04:35:32 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/20 04:57:34 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,25 @@ int	ft_atoi_plus(char *str, int *something_wrong)
 	return (*something_wrong = 1 * (str[i] != '\0'), signe * res);
 }
 
-void	ft_applay_move(char *move, t_stack **top_a, t_stack **tail_a, t_stack **top_b, t_stack **tail_b)
+int	ft_applay_move(char *move, t_stack **top_a, t_stack **tail_a, t_stack **top_b, t_stack **tail_b)
 {
 	if (!ft_strcmp(move, "sa"))
-		ft_swap_rule(top_a, tail_a);
+		return (ft_swap_rule(top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "sb"))
-		ft_swap_rule(top_b, tail_b);
+		return (ft_swap_rule(top_b, tail_b), 1);
 	else if (!ft_strcmp(move, "ra"))
-		ft_rotate_rule(top_a, tail_a);
+		return (ft_rotate_rule(top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "rb"))
-		ft_rotate_rule(top_b, tail_b);
+		return (ft_rotate_rule(top_b, tail_b), 1);
 	else if (!ft_strcmp(move, "rra"))
-		ft_reverse_rotate_rule(top_a, tail_a);
+		return (ft_reverse_rotate_rule(top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "rrb"))
-		ft_reverse_rotate_rule(top_b, tail_b);
+		return (ft_reverse_rotate_rule(top_b, tail_b), 1);
 	else if (!ft_strcmp(move, "pa"))
-		ft_push_rule(top_b, tail_b, top_a, tail_a);
+		return (ft_push_rule(top_b, tail_b, top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "pb"))
-		ft_push_rule(top_a, tail_a, top_b, tail_b);
+		return (ft_push_rule(top_a, tail_a, top_b, tail_b), 1);
+	return (0);
 }
 
 //int	main(int ac, char **av)
@@ -93,7 +94,6 @@ int main(int ac, char **av)
 	int	something_wrong;
 	int	*ptrval;
 	int	val;
-	static char	move[10];
 
 	if (ac == 1)
 		return (0);
@@ -112,15 +112,22 @@ int main(int ac, char **av)
 
 	ft_print_stack2(top_a, "a");
 	ft_print_stack2(top_b, "b");
+	printf("**********************************\n");
 	
-	while (read(0, move, 3) > 1)
+	while (1)
 	{
-		ft_applay_move(move, &top_a, &tail_a, &top_b, &tail_b);
+		char move[10];
+		scanf("%s", move);
+		printf("{%s}\n", move);
+		if (!ft_applay_move(move, &top_a, &tail_a, &top_b, &tail_b))
+			return (0);
 		ft_print_stack2(top_a, "a");
 		ft_print_stack2(top_b, "b");
+		printf("**********************************\n");
 		move[0] = 0;
 		move[1] = 0;
 		move[2] = 0;
 		move[3] = 0;
+		move[4] = 0;
 	}
 }
