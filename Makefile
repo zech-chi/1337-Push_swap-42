@@ -1,21 +1,21 @@
-NAME = push_swap.a
-MANSRCS = ft_split.c push_swap.c push_swap_utils1.c stack.c
-MANOBJS = $(MANSRCS:.c = .o)
+#NAME = push_swap.a
+#MANSRCS = ft_split.c push_swap.c push_swap_utils1.c stack.c
+#MANOBJS = $(MANSRCS:.c = .o)
 
-$(NAME) : $(MANOBJS)
-	ar -rcs $@ $^
+#$(NAME) : $(MANOBJS)
+#	ar -rcs $@ $^
 
-all: $(NAME)
+#all: $(NAME)
 
-%.o : %.c push_swap.h
-	cc -Wall -Wextra -Werror -c $^ -o $@
+#%.o : %.c push_swap.h
+#	cc -Wall -Wextra -Werror -c $^ -o $@
 
-clean:
-	rm -f $(MANOBJS)
+#clean:
+#	rm -f $(MANOBJS)
 
-fclean: clean
-	rm -f $(NAME)
+#fclean: clean
+#	rm -f $(NAME)
 
-re: fclean all
+#re: fclean all
 
-.PHONY: fclean clean
+#.PHONY: fclean clean

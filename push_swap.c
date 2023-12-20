@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:02:38 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/20 04:57:34 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/20 06:01:31 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ int	ft_applay_move(char *move, t_stack **top_a, t_stack **tail_a, t_stack **top_
 		return (ft_rotate_rule(top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "rb"))
 		return (ft_rotate_rule(top_b, tail_b), 1);
+	else if (!ft_strcmp(move, "rr"))
+		return (ft_rotate_rule(top_a, tail_a), ft_rotate_rule(top_b, tail_b), 1);
 	else if (!ft_strcmp(move, "rra"))
 		return (ft_reverse_rotate_rule(top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "rrb"))
 		return (ft_reverse_rotate_rule(top_b, tail_b), 1);
+	else if (!ft_strcmp(move, "rrr"))
+		return (ft_reverse_rotate_rule(top_a, tail_a), ft_reverse_rotate_rule(top_b, tail_b), 1);
 	else if (!ft_strcmp(move, "pa"))
 		return (ft_push_rule(top_b, tail_b, top_a, tail_a), 1);
 	else if (!ft_strcmp(move, "pb"))
@@ -114,13 +118,15 @@ int main(int ac, char **av)
 	ft_print_stack2(top_b, "b");
 	printf("**********************************\n");
 	
+	char move[10];
 	while (1)
 	{
-		char move[10];
 		scanf("%s", move);
-		printf("{%s}\n", move);
-		if (!ft_applay_move(move, &top_a, &tail_a, &top_b, &tail_b))
-			return (0);
+		while (!ft_applay_move(move, &top_a, &tail_a, &top_b, &tail_b))
+		{
+			printf("try again!!!!\n");
+			scanf("%s", move);
+		}
 		ft_print_stack2(top_a, "a");
 		ft_print_stack2(top_b, "b");
 		printf("**********************************\n");
@@ -129,5 +135,7 @@ int main(int ac, char **av)
 		move[2] = 0;
 		move[3] = 0;
 		move[4] = 0;
+		char move[10];
+		scanf("%s", move);
 	}
 }
