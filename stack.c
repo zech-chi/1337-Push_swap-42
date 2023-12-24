@@ -6,106 +6,113 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 22:08:25 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/20 04:36:29 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/24 11:57:54 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push(t_stack **top, t_stack **tail, int *value)
+//void	ft_push(t_stack *stack->top, t_stack *stack->tail, int value)
+//this function add a node into top of the stack
+// if everything is ok it return 1 or 0 otherwise
+int	ft_push(t_stack *stack, int value)
 {
-	t_stack	*new_node;
+	t_node	*new_node;
 
-	if (!value)
-		return ;
-	new_node = (t_stack *)malloc(sizeof(t_stack));
+	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
-		return ;
+		return (0);
 	new_node->value = value;
+	new_node->lis = 1;
+	new_node->in_lis = 0;
 	new_node->up = NULL;
-	new_node->down = *top;
-	if (*top)
-		(*top)->up = new_node;
-	if (!(*tail))
-		*tail = new_node;
-	*top = new_node;
+	new_node->down = stack->top;
+	if (stack->top)
+		stack->top->up = new_node;
+	if (!(stack->tail))
+		stack->tail = new_node;
+	stack->top = new_node;
+	stack->len += 1;
+	return (1);
 }
 
-void	ft_swap_rule(t_stack **top, t_stack **tail)
+void	ft_swap_rule(t_stack *stack)
 {
-	t_stack	*new_top;
+	t_node	*new_top;
 
-	if (!(*top) || !((*top)->down))
+	if (!(stack->top) || !(stack->top->down))
 		return ;
-	new_top	= (*top)->down;
-	(*top)->down = new_top->down;
-	(*top)->up = new_top;
+	new_top = stack->top->down;
+	stack->top->down = new_top->down;
+	stack->top->up = new_top;
 	if (new_top->down)
-		new_top->down->up = *top;
+		new_top->down->up = stack->top;
 	else
-		*tail = *top;
-	new_top->down = *top;
+		stack->tail = stack->top;
+	new_top->down = stack->top;
 	new_top->up = NULL;
-	*top = new_top;
+	stack->top = new_top;
 }
 // pop from stack1 and push in stack2
-void	ft_push_rule(t_stack **top1, t_stack **tail1, t_stack **top2, t_stack **tail2)
+void	ft_push_rule(t_stack *stack_1, t_stack *stack_2)
 {
-	t_stack	*prev_top1;
+	t_node	*prev_top1;
 
-	if (!(*top1))
+	if (!(stack_1->top))
 		return ;
-	prev_top1 = *top1;
-	*top1 = (*top1)->down;
-	if (*top2)
+	prev_top1 = stack_1->top;
+	stack_1->top = stack_1->top->down;
+	if (stack_2->top)
 	{
-		prev_top1->down = *top2;
-		(*top2)->up = prev_top1;
+		prev_top1->down = stack_2->top;
+		stack_2->top->up = prev_top1;
 	}
 	else
 	{
-		*tail2 = prev_top1;
+		stack_2->tail = prev_top1;
 		prev_top1->down = NULL;
 	}
-	*top2 = prev_top1;
-	if (*top1)
-		(*top1)->up = NULL;
+	stack_2->top = prev_top1;
+	if (stack_1->top)
+		stack_1->top->up = NULL;
 	else
-		*tail1 = NULL;
+		stack_1->tail = NULL;
+	stack_1->len -= 1;
+	stack_2->len += 1;
 }
 
-void	ft_rotate_rule(t_stack **top, t_stack **tail)
+void	ft_rotate_rule(t_stack *stack)
 {
-	if (!(*top) || !((*top)->down))
+	if (!(stack->top) || !(stack->top->down))
 		return ;
-	*top = (*top)->down;
-	(*top)->up->up = *tail;
-	(*top)->up->down = NULL;
-	*tail = (*top)->up;
-	(*top)->up = NULL;
-	(*tail)->up->down = *tail;
+	stack->top = stack->top->down;
+	stack->top->up->up = stack->tail;
+	stack->top->up->down = NULL;
+	stack->tail = (stack->top)->up;
+	stack->top->up = NULL;
+	stack->tail->up->down = stack->tail;
 }
 
-void	ft_reverse_rotate_rule(t_stack **top, t_stack **tail)
+void	ft_reverse_rotate_rule(t_stack *stack)
 {
-	if (!(*top) || !((*top)->down))
+	if (!(stack->top) || !(stack->top->down))
 		return ;
-	(*top)->up = *tail;
-	(*tail)->down = *top;
-	*top = *tail;
-	*tail = (*tail)->up;
-	(*top)->up = NULL;
-	(*tail)->down = NULL;
+	stack->top->up = stack->tail;
+	stack->tail->down = stack->top;
+	stack->top = stack->tail;
+	stack->tail = stack->tail->up;
+	stack->top->up = NULL;
+	stack->tail->down = NULL;
 }
 
 //int	main()
 //{
 //	//stack_a
-//	t_stack	*top_a = NULL;
-//	t_stack	*tail_a = NULL;
+//	t_stack	stack->top_a = NULL;
+//	t_stack	stack->tail_a = NULL;
 //	//stack_b
-//	t_stack	*top_b = NULL;
-//	t_stack	*tail_b = NULL;
+//	t_stack	stack->top_b = NULL;
+//	t_stack	stack->tail_b = NULL;
 //	//elements
 //	int	tab[6] = {8, 5, 6, 3, 1, 2};
 //	int	*value;
