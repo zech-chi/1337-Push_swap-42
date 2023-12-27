@@ -1,12 +1,12 @@
 ///* ************************************************************************** */
 ///*                                                                            */
 ///*                                                        :::      ::::::::   */
-///*   push_swap.c                                        :+:      :+:    :+:   */
+///*   push_swap4.c                                       :+:      :+:    :+:   */
 ///*                                                    +:+ +:+         +:+     */
 ///*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 ///*                                                +#+#+#+#+#+   +#+           */
 ///*   Created: 2023/12/18 09:02:38 by zech-chi          #+#    #+#             */
-///*   Updated: 2023/12/27 16:18:14 by zech-chi         ###   ########.fr       */
+///*   Updated: 2023/12/27 17:32:02 by zech-chi         ###   ########.fr       */
 ///*                                                                            */
 ///* ************************************************************************** */
 
@@ -176,6 +176,60 @@
 //	return (index_min);
 //}
 
+//int	abs(int x)
+//{
+//	if (x >= 0)
+//		return (x);
+//	return (-x);
+//}
+
+//int	ft_get_max_lis(t_stack stack)
+//{
+//	t_node	*node;
+//	int	max_lis;
+
+//	max_lis = 0;
+//	node = stack.top;
+//	while (node)
+//	{
+//		max_lis = max(max_lis, node->lis);
+//		node = node->down;
+//	}
+//	return (max_lis);
+//}
+
+//void	ft_applay_best_lis(t_stack *stack_a)
+//{
+//	int	ra;
+//	int	max_lis;
+//	int	best_ra;
+//	int cur_lis;
+//	int	rra;
+
+//	max_lis = -1;
+//	ra = 0;
+//	while (ra < stack_a->len)
+//	{
+//		ft_LIS(stack_a);
+//		cur_lis = ft_get_max_lis(*stack_a);
+//		if (cur_lis > max_lis)
+//		{
+//			max_lis = cur_lis;
+//			best_ra = ra;
+//		}
+//		ft_rotate_rule(stack_a);
+//		ra++;
+//	}
+//	ra = -1;
+//	while (++ra < best_ra)
+//		ft_rotate_rule(stack_a);
+//	ft_LIS(stack_a);
+//	ft_flagLISelements(stack_a);
+//	rra = -1;
+//	while (++rra < best_ra)
+//		ft_reverse_rotate_rule(stack_a);
+//}
+
 
 //void	ft_applay_best_move(t_stack *stack_a, t_stack *stack_b)
 //{
@@ -186,10 +240,20 @@
 //	int	cost;
 //	int	min_cost;
 //	t_node	*node_b;
-//	int	ra = 0;
-//	int	rb = 0;
-//	int	rra = 0;
-//	int	rrb = 0;
+//	int	ra;
+//	int	rb;
+//	int	rra;
+//	int	rrb;
+
+//	//int	c_ra;
+//	//int	c_rb;
+//	//int	c_rra;
+//	//int	c_rrb;
+
+//	ra = 0;
+//	rb = 0;
+//	rra = 0;
+//	rrb = 0;
 
 //	index_a = -1;
 //	index_b = -1;
@@ -201,13 +265,16 @@
 //		a = ft_get_min_great(*stack_a, node_b->value);
 //		/////
 //		if (a == -1)
-//		{
-//			int	j = ft_get_index_min(*stack_a);
-//			cost = min(j, stack_a->len - j) + min(b, stack_b->len - b);
-//		}
+//			a = ft_get_index_min(*stack_a);
+//		if (a < stack_a ->len - a)
+//			ra = a;
 //		else
-//		//////
-//			cost = min(a, stack_a->len - a) + min(b, stack_b->len - b);
+//			rra = stack_a->len - a;
+//		if (b < stack_b->len - b)
+//			rb = b;
+//		else
+//			rrb = stack_b->len - b;
+//		cost = max(ra, rb) + max(rra, rrb);
 //		//printf("b = %d a = %d cost = %d\n", node_b->value, a, cost);
 //		if ((min_cost == -1) || cost < min_cost)
 //		{
@@ -217,16 +284,12 @@
 //		}
 //		node_b = node_b->down;
 //		b++;
+//		ra = 0;
+//		rb = 0;
+//		rra = 0;
+//		rrb = 0;
 //	}
-//	if (index_a == -1)
-//	{
-//		int	min_index = ft_get_index_min(*stack_a);
-//		if (min_index < stack_a->len - min_index)
-//			ra = min_index;
-//		else
-//			rra = stack_a->len - min_index;
-//	}
-//	else if (index_a < stack_a ->len - index_a)
+//	if (index_a < stack_a ->len - index_a)
 //		ra = index_a;
 //	else
 //		rra = stack_a->len - index_a;
@@ -234,9 +297,9 @@
 //		rb = index_b;
 //	else
 //		rrb = stack_b->len - index_b;
-//	while (ra || rb)
+//	while (ra > 0 || rb > 0)
 //	{
-//		if (ra && rb)
+//		if (ra > 0 && rb > 0)
 //		{
 //			ft_rotate_rule(stack_a);
 //			ft_rotate_rule(stack_b);
@@ -244,22 +307,22 @@
 //			rb--;
 //			printf("rr\n");
 //		}
-//		else if (ra)
+//		else if (ra > 0)
 //		{
 //			ft_rotate_rule(stack_a);
 //			ra--;
 //			printf("ra\n");
 //		}
-//		else if (rb)
+//		else if (rb > 0)
 //		{
 //			ft_rotate_rule(stack_b);
 //			rb--;
 //			printf("rb\n");
 //		}
 //	}
-//	while (rra || rrb)
+//	while (rra > 0 || rrb > 0)
 //	{
-//		if (rra && rrb)
+//		if (rra > 0 && rrb > 0)
 //		{
 //			ft_reverse_rotate_rule(stack_a);
 //			ft_reverse_rotate_rule(stack_b);
@@ -267,13 +330,13 @@
 //			rrb--;
 //			printf("rrr\n");
 //		}
-//		else if (rra)
+//		else if (rra > 0)
 //		{
 //			ft_reverse_rotate_rule(stack_a);
 //			rra--;
 //			printf("rra\n");
 //		}
-//		else if (rrb)
+//		else if (rrb > 0)
 //		{
 //			ft_reverse_rotate_rule(stack_b);
 //			rrb--;
@@ -323,7 +386,7 @@
 //		ft_push(&stack_a, val);
 //	}
 	
-//	ft_LIS(&stack_a);
+//	ft_applay_best_lis(&stack_a);
 //	if (stack_a.len == stack_a.len_lis)
 //	{
 //		printf("\n\nstack already sorted\n\n");

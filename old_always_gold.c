@@ -393,3 +393,214 @@
 //	ft_print_stack2(stack_b, "b");
 //	printf("**********************************\n");
 //}
+
+//void	ft_applay_best_move(t_stack *stack_a, t_stack *stack_b)
+//{
+//	int	index_a;
+//	int	index_b;
+//	int	a;
+//	int	b;
+//	int	cost;
+//	int	min_cost;
+//	t_node	*node_b;
+
+//	index_a = -1;
+//	index_b = -1;
+//	min_cost = -1;
+//	b = 0;
+//	node_b = stack_b->top;
+//	while (node_b)
+//	{
+//		a = ft_get_min_great(*stack_a, node_b->value);
+//		cost = min(a, stack_a->len - a) + min(b, stack_b->len - b);
+//		//printf("b = %d a = %d cost = %d\n", node_b->value, a, cost);
+//		if ((min_cost == -1) || cost < min_cost)
+//		{
+//			index_a = a;
+//			index_b = b;
+//			min_cost = cost;
+//		}
+//		node_b = node_b->down;
+//		b++;
+//	}
+//	int i = -1;
+//	if (index_a == -1)
+//	{
+//		int	min_index = ft_get_index_min(*stack_a);
+//		if (min_index != -1)
+//		{
+//			if (min_index < stack_a->len - min_index)
+//			{
+//				while (++i < min_index)
+//				{
+//					ft_rotate_rule(stack_a);
+//					printf("ra\n");
+//				}
+//			}
+//			else
+//			{
+//				while (++i < stack_a->len - min_index)
+//				{
+//					ft_reverse_rotate_rule(stack_a);
+//					printf("rra\n");
+//				}
+//			}
+//		}
+//	}
+//	else if (index_a < stack_a ->len - index_a)
+//	{
+//		while (++i < index_a)
+//		{
+//			ft_rotate_rule(stack_a);
+//			printf("ra\n");
+//		}
+//	}
+//	else
+//	{
+//		while (++i < stack_a->len - index_a)
+//		{
+//			ft_reverse_rotate_rule(stack_a);
+//			printf("rra\n");
+//		}
+//	}
+//	i = -1;
+//	if (index_b < stack_b->len - index_b)
+//	{
+//		while (++i < index_b)
+//		{
+//			ft_rotate_rule(stack_b);
+//			printf("rb\n");
+//		}
+//	}
+//	else
+//	{
+//		while (++i < stack_b->len - index_b)
+//		{
+//			ft_reverse_rotate_rule(stack_b);
+//			printf("rrb\n");
+//		}
+//	}
+//	ft_push_rule(stack_b, stack_a);
+//	printf("pa\n");
+//}
+
+
+
+//void	ft_applay_best_move(t_stack *stack_a, t_stack *stack_b)
+//{
+//	int	index_a;
+//	int	index_b;
+//	int	a;
+//	int	b;
+//	int	cost;
+//	int	min_cost;
+//	t_node	*node_b;
+//	int	ra = 0;
+//	int	rb = 0;
+//	int	rra = 0;
+//	int	rrb = 0;
+
+//	index_a = -1;
+//	index_b = -1;
+//	min_cost = -1;
+//	b = 0;
+//	node_b = stack_b->top;
+//	while (node_b)
+//	{
+//		a = ft_get_min_great(*stack_a, node_b->value);
+//		cost = min(a, stack_a->len - a) + min(b, stack_b->len - b);
+//		//printf("b = %d a = %d cost = %d\n", node_b->value, a, cost);
+//		if ((min_cost == -1) || cost < min_cost)
+//		{
+//			index_a = a;
+//			index_b = b;
+//			min_cost = cost;
+//		}
+//		node_b = node_b->down;
+//		b++;
+//	}
+//	int i = -1;
+//	if (index_a == -1)
+//	{
+//		int	min_index = ft_get_index_min(*stack_a);
+//		if (min_index != -1)
+//		{
+//			if (min_index < stack_a->len - min_index)
+//			{
+//				while (++i < min_index)
+//					ra++;
+//			}
+//			else
+//			{
+//				while (++i < stack_a->len - min_index)
+//					rra++;
+//			}
+//		}
+//	}
+//	else if (index_a < stack_a ->len - index_a)
+//	{
+//		while (++i < index_a)
+//			ra++;
+//	}
+//	else
+//	{
+//		while (++i < stack_a->len - index_a)
+//			rra++;
+//	}
+//	i = -1;
+//	if (index_b < stack_b->len - index_b)
+//	{
+//		while (++i < index_b)
+//			rb++;
+//	}
+//	else
+//	{
+//		while (++i < stack_b->len - index_b)
+//			rrb++;
+//	}
+//	while (ra && rb)
+//	{
+//		ft_rotate_rule(stack_a);
+//		ft_rotate_rule(stack_b);
+//		ra--;
+//		rb--;
+//		printf("rr\n");
+//	}
+//	while (ra)
+//	{
+//		ft_rotate_rule(stack_a);
+//		ra--;
+//		printf("ra\n");
+//	}
+//	while (rb)
+//	{
+//		ft_rotate_rule(stack_b);
+//		rb--;
+//		printf("rb\n");
+//	}
+//	while (rra || rrb)
+//	{
+//		if (rra && rrb)
+//		{
+//			ft_reverse_rotate_rule(stack_a);
+//			ft_reverse_rotate_rule(stack_b);
+//			rra--;
+//			rrb--;
+//			printf("rrr\n");
+//		}
+//		else if (rra)
+//		{
+//			ft_reverse_rotate_rule(stack_a);
+//			rra--;
+//			printf("rra\n");
+//		}
+//		else if (rrb)
+//		{
+//			ft_reverse_rotate_rule(stack_b);
+//			rrb--;
+//			printf("rrb\n");
+//		}
+//	}
+//	ft_push_rule(stack_b, stack_a);
+//	printf("pa\n");
+//}

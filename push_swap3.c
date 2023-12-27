@@ -1,12 +1,12 @@
 ///* ************************************************************************** */
 ///*                                                                            */
 ///*                                                        :::      ::::::::   */
-///*   push_swap.c                                        :+:      :+:    :+:   */
+///*   push_swap3.c                                       :+:      :+:    :+:   */
 ///*                                                    +:+ +:+         +:+     */
 ///*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 ///*                                                +#+#+#+#+#+   +#+           */
 ///*   Created: 2023/12/18 09:02:38 by zech-chi          #+#    #+#             */
-///*   Updated: 2023/12/27 16:18:14 by zech-chi         ###   ########.fr       */
+///*   Updated: 2023/12/27 16:21:14 by zech-chi         ###   ########.fr       */
 ///*                                                                            */
 ///* ************************************************************************** */
 
@@ -129,7 +129,7 @@
 ////	return (0);
 ////}
 
-//int	ft_get_min_great(t_stack stack_a, int b)
+//int	ft_get_min_great(t_stack stack_a, int b, int *store_it_here)
 //{
 //	t_node	*cur_node;
 //	int	min_great;
@@ -149,7 +149,8 @@
 //		index++;
 //		cur_node = cur_node->down;
 //	}
-	
+//	if (min_great_index != -1)
+//		*store_it_here = min_great;
 //	return (min_great_index);
 //}
 
@@ -181,52 +182,89 @@
 //{
 //	int	index_a;
 //	int	index_b;
-//	int	a;
+//	int	less_greater_in_a;
+//	int	less_greater_in_b;
+//	int	less_greater_in_a_index;
+//	int	less_greater_in_b_index;
+//	int	min_index;
 //	int	b;
 //	int	cost;
 //	int	min_cost;
-//	t_node	*node_b;
-//	int	ra = 0;
-//	int	rb = 0;
-//	int	rra = 0;
-//	int	rrb = 0;
-
+//	t_node	*node_b = stack_b->top;
+//	int	ra;
+//	int	rb;
+//	int	rra;
+//	int	rrb;
+//	ra = 0;
+//	rb = 0;
+//	rra = 0;
+//	rrb = 0;
+//	b = 0;
 //	index_a = -1;
 //	index_b = -1;
+//	less_greater_in_a = -2147483648;
+//	less_greater_in_b = -2147483648;
 //	min_cost = -1;
-//	b = 0;
-//	node_b = stack_b->top;
 //	while (node_b)
 //	{
-//		a = ft_get_min_great(*stack_a, node_b->value);
-//		/////
-//		if (a == -1)
+//		less_greater_in_a_index = ft_get_min_great(*stack_a, node_b->value, &less_greater_in_a);
+//		less_greater_in_b_index = ft_get_min_great(*stack_b, node_b->value, &less_greater_in_b);
+//		//printf("val = %d, a = %d, a_index = %d , b = %d, b_index = %d\n", node_b->value,less_greater_in_a, less_greater_in_a_index, less_greater_in_b, less_greater_in_b_index);
+//		//this a big number
+//		if (less_greater_in_a_index == -1 && less_greater_in_b_index == -1)
 //		{
-//			int	j = ft_get_index_min(*stack_a);
-//			cost = min(j, stack_a->len - j) + min(b, stack_b->len - b);
+//			//printf("hna1\n");
+//			min_index = ft_get_index_min(*stack_a);
+//			cost = min(b, stack_b->len - b) + min(min_index, stack_a->len - min_index);
+//			if (min_cost == -1 || cost < min_cost)
+//			{
+//				index_a = min_index;
+//				index_b = b;
+//				min_cost = cost;
+//				//printf("cost = %d\n", cost);
+//				//printf("index_a = %d\n", index_a);
+//				//printf("index_b = %d\n", index_b);
+//			}
 //		}
-//		else
-//		//////
-//			cost = min(a, stack_a->len - a) + min(b, stack_b->len - b);
-//		//printf("b = %d a = %d cost = %d\n", node_b->value, a, cost);
-//		if ((min_cost == -1) || cost < min_cost)
+//		else if (less_greater_in_a_index != -1 && less_greater_in_b_index != -1)
 //		{
-//			index_a = a;
-//			index_b = b;
-//			min_cost = cost;
+//			//printf("hna2\n");
+//			if (less_greater_in_a < less_greater_in_b)
+//			{
+//				//printf("hna2_1\n");
+//				cost = min(b, stack_b->len - b) + min(less_greater_in_a_index, stack_a->len - less_greater_in_a_index);
+//				//printf("cost_cal = %d\n", cost);
+//				//printf("min_cost = %d\n", min_cost);
+//				if (min_cost == -1 || cost < min_cost)
+//				{
+//					index_a = less_greater_in_a_index;
+//					index_b = b;
+//					min_cost = cost;
+//					//printf("cost = %d\n", cost);
+//					//printf("index_a = %d\n", index_a);
+//					//printf("index_b = %d\n", index_b);
+//				}
+//			}
 //		}
-//		node_b = node_b->down;
+//		else if (less_greater_in_a_index != -1)
+//		{
+//			//printf("hna3\n");
+//			cost = min(b, stack_b->len - b) + min(less_greater_in_a_index, stack_a->len - less_greater_in_a_index);
+//			if (min_cost == -1 || cost < min_cost)
+//			{
+//				index_a = less_greater_in_a_index;
+//				index_b = b;
+//				min_cost = cost;
+//				//printf("cost = %d\n", cost);
+//				//printf("index_a = %d\n", index_a);
+//				//printf("index_b = %d\n", index_b);
+//			}
+//		}
 //		b++;
+//		node_b = node_b->down;
 //	}
-//	if (index_a == -1)
-//	{
-//		int	min_index = ft_get_index_min(*stack_a);
-//		if (min_index < stack_a->len - min_index)
-//			ra = min_index;
-//		else
-//			rra = stack_a->len - min_index;
-//	}
-//	else if (index_a < stack_a ->len - index_a)
+	
+//	if (index_a < stack_a ->len - index_a)
 //		ra = index_a;
 //	else
 //		rra = stack_a->len - index_a;
@@ -234,9 +272,18 @@
 //		rb = index_b;
 //	else
 //		rrb = stack_b->len - index_b;
-//	while (ra || rb)
+//	//printf("###########################\n");
+//	//printf("cost = %d\n", min_cost);
+//	//printf("index_a = %d\n", index_a);
+//	//printf("index_b = %d\n", index_b);
+//	//printf("ra = %d\n", ra);
+//	//printf("rra = %d\n", rra);
+//	//printf("rb = %d\n", rb);
+//	//printf("rrb = %d\n", rrb);
+//	//printf("###########################\n");
+//	while (ra > 0 || rb > 0)
 //	{
-//		if (ra && rb)
+//		if (ra > 0 && rb > 0)
 //		{
 //			ft_rotate_rule(stack_a);
 //			ft_rotate_rule(stack_b);
@@ -244,20 +291,20 @@
 //			rb--;
 //			printf("rr\n");
 //		}
-//		else if (ra)
+//		else if (ra > 0)
 //		{
 //			ft_rotate_rule(stack_a);
 //			ra--;
 //			printf("ra\n");
 //		}
-//		else if (rb)
+//		else if (rb > 0)
 //		{
 //			ft_rotate_rule(stack_b);
 //			rb--;
 //			printf("rb\n");
 //		}
 //	}
-//	while (rra || rrb)
+//	while (rra > 0 || rrb  > 0)
 //	{
 //		if (rra && rrb)
 //		{
@@ -267,13 +314,13 @@
 //			rrb--;
 //			printf("rrr\n");
 //		}
-//		else if (rra)
+//		else if (rra > 0)
 //		{
 //			ft_reverse_rotate_rule(stack_a);
 //			rra--;
 //			printf("rra\n");
 //		}
-//		else if (rrb)
+//		else if (rrb > 0)
 //		{
 //			ft_reverse_rotate_rule(stack_b);
 //			rrb--;
@@ -284,18 +331,18 @@
 //	printf("pa\n");
 //}
 
-//void	ft_print_max_small_min_great(t_stack stack_a, t_stack stack_b)
-//{
-//	t_node	*node_b;
+////void	ft_print_max_small_min_great(t_stack stack_a, t_stack stack_b)
+////{
+////	t_node	*node_b;
 
-//	node_b = stack_b.top;
-//	while (node_b)
-//	{
-//		printf("val: %d , ltaht: %d\n", node_b->value, \
-//		ft_get_min_great(stack_a, node_b->value));
-//		node_b = node_b->down;
-//	}
-//}
+////	node_b = stack_b.top;
+////	while (node_b)
+////	{
+////		printf("val: %d , ltaht: %d\n", node_b->value, \
+////		ft_get_min_great(stack_a, node_b->value));
+////		node_b = node_b->down;
+////	}
+////}
 
 //int main(int ac, char **av)
 //{

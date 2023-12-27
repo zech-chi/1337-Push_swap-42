@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 21:16:19 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/24 11:59:19 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:49:51 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,12 @@ void	ft_LIS(t_stack *stack)
 	t_node	*node_i;
 	t_node	*node_j;
 
+	node_i = stack->top;
+	while (node_i)
+	{
+		node_i->lis = 1;
+		node_i = node_i->down;
+	}
 	node_i = stack->tail->up;
 	while (node_i)
 	{
@@ -108,8 +114,54 @@ void	ft_LIS(t_stack *stack)
 		}
 		node_i = node_i->up;
 	}
-	ft_flagLISelements(stack);
+	//ft_flagLISelements(stack);
 }
+//void	ft_flagLISelements(t_stack *stack)
+//{
+//	t_node	*cur;
+//	int	max;
+
+//	cur = stack->top;
+//	max = 1;
+//	while (cur)
+//	{
+//		if (cur->lis > max)
+//			max = cur->lis;
+//		cur = cur->down;
+//	}
+//	stack->len_lis = max;
+//	cur = stack->top;
+//	while (max > 0)
+//	{
+//		if (cur->lis == max)
+//		{
+//			cur->in_lis = 1;
+//			max--;
+//		}
+//		cur = cur->down;
+//	}
+//}
+
+//void	ft_LIS(t_stack *stack)
+//{
+//	t_node	*node_i;
+//	t_node	*node_j;
+
+//	node_i = stack->tail->up;
+//	while (node_i)
+//	{
+//		node_j = node_i->down;
+//		while (node_j)
+//		{
+//			if (node_i->value < node_j->value)
+//				if (node_i->lis < node_j->lis + 1)
+//					node_i->lis = node_j->lis + 1;
+//			node_j = node_j->down;
+//		}
+//		node_i = node_i->up;
+//	}
+//	ft_flagLISelements(stack);
+//}
 
 int	max(int	a, int b)
 {

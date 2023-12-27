@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:00:34 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/24 11:58:08 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/26 09:40:39 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_node
 	int		value;
 	int		lis;
 	int		in_lis;
-	int		len_lis;
 	struct s_node	*up;
 	struct s_node	*down;
 }	t_node;
