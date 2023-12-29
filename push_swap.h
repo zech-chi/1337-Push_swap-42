@@ -5,91 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 16:00:34 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/26 09:40:39 by zech-chi         ###   ########.fr       */
+/*   Created: 2023/12/28 19:33:13 by zech-chi          #+#    #+#             */
+/*   Updated: 2023/12/29 23:15:52 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
-
-//typedef struct s_stack
-//{
-//	int				value;
-//	int				lis;
-//	int				in_lis;
-//	struct s_stack	*up;
-//	struct s_stack	*down;
-//}	t_stack;
-
-//typedef struct s_node
-//{
-//    int				*value;
-//    struct s_stack	*up;
-//    struct s_stack	*down;
-//}	t_node;
-
-//typedef struct s_stack
-//{
-//	t_node	*top;
-//	t_node	*tail;
-//	int	len;
-//	int	max;
-//	int	max_index;
-//	int	min;
-//	int	min_index;
-//}	t_stack;
+# include <stdio.h>
 
 typedef struct s_node
 {
-	int		value;
-	int		lis;
-	int		in_lis;
+	int				value;
+	int				lis;
+	int				in_lis;
 	struct s_node	*up;
 	struct s_node	*down;
 }	t_node;
 
-typedef	struct s_stack
+typedef struct s_stack
 {
 	t_node	*top;
 	t_node	*tail;
 	int		len;
 	int		len_lis;
+	int		maximus;
+	int		minimus;
 }	t_stack;
 
+typedef struct s_from_b_to_a
+{
+	int	best_a;
+	int	best_b;
+	int	cur_a;
+	int	cur_b;
+	int	min_cost;
+	int	cur_cost;
+	int	ra;
+	int	rb;
+	int	rra;
+	int	rrb;
+	int	best_ra;
+	int	best_rb;
+	int	best_rra;
+	int	best_rrb;
+}	t_from_b_to_a;
 
-// utils
-char	**ft_split(char const *s, char c);
-size_t	ft_strlen(const char *s);
-void	ft_putstr_fd(char *s, int fd);
-int		ft_strcmp(char *s1, char *s2);
-void	ft_flagLISelements(t_stack *stack);
-void	ft_LIS(t_stack *stack);
-int		ft_stack_is_sorted(t_stack stack_a);
-int		max(int	a, int b);
-int		min(int	a, int b);
-
-void	ft_print_from_top_to_tail(t_stack stack);
-void	ft_print_from_tail_to_top(t_stack stack);
-void	ft_print_stack(t_stack stack, char *name);
-void	ft_print_stack2(t_stack stack, char *name);
-void	ft_print_stack_with_lis(t_stack stack, char *name);
-
-// must implemted 
-// int	ft_is_stack_already_sorted;
-
-//pushinstack
-int	ft_push(t_stack *stack, int value);
-
-//rules
+// stack.c
+int		ft_push(t_stack *stack, int value);
 void	ft_swap_rule(t_stack *stack);
 void	ft_push_rule(t_stack *stack_1, t_stack *stack_2);
 void	ft_rotate_rule(t_stack *stack);
 void	ft_reverse_rotate_rule(t_stack *stack);
 
-int	ft_applay_move(char *move, t_stack *stack_a, t_stack *stack_b);
+// ft_split.c
+char	**ft_split(char const *s, char c);
+void	free_ptr(char **ptr, size_t size);
+
+// push_swap_utils1.c
+void	ft_putstrnl_fd(char *s, int fd);
+int		max(int a, int b);
+int		min(int a, int b);
+int		ft_atoi_plus(char *str, int *something_wrong);
+int		ft_is_valid_input(int ac, char **av, t_stack *stack_a);
+
+//push_swap_utils2.c
+void	ft_sort_3(t_stack *stack_a);
+int		ft_stack_is_sorted(t_stack stack_a);
+int		ft_is_already_in_stack(t_stack stack_a, int val);
+void	ft_applay_ra_rb(t_stack *stack_a, t_stack *stack_b, int ra, int rb);
+
+// from_a_to_b.c
+void	ft_flag_lis_elements(t_stack *stack);
+int		ft_get_max_lis(t_stack stack);
+int		ft_lis(t_stack *stack);
+void	ft_applay_best_lis(t_stack *stack_a);
+void	ft_from_a_to_b(t_stack *stack_a, t_stack *stack_b);
+void	ft_applay_rra_rrb(t_stack *stack_a, t_stack *stack_b, int rra, int rrb);
+
+// from_b_to_a.c
+int		ft_get_index_min(t_stack stack_a);
+int		ft_get_min_great(t_stack stack_a, int b);
+int		ft_get_cost(t_from_b_to_a *info, t_stack stack_a, t_stack stack_b);
+void	ft_b_to_a_help(t_stack *stack_a, t_stack *stack_b, t_from_b_to_a *info);
+void	ft_from_b_to_a(t_stack *stack_a, t_stack *stack_b);
+
+// to remove;
+void	ft_print_stack2(t_stack stack, char *name);
 
 #endif

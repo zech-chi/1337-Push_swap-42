@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 23:09:52 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/18 23:23:59 by zech-chi         ###   ########.fr       */
+/*   Created: 2023/12/29 10:40:30 by zech-chi          #+#    #+#             */
+/*   Updated: 2023/12/29 23:35:25 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ static int	count_words(char const *s, char c)
 	return (counter);
 }
 
-static void	free_ptr(char **ptr, size_t size)
+void	free_ptr(char **ptr, size_t size)
 {
-	size_t	col;
+	size_t	row;
 
-	col = 0;
-	while (col < size)
-		free(ptr[col++]);
+	if (!ptr)
+		return ;
+	row = 0;
+	while (row < size)
+		free(ptr[row++]);
 	free(ptr);
 }
 
