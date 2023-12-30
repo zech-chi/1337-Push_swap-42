@@ -6,15 +6,12 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:32:57 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/29 18:23:10 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:17:48 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//if this function return 1 everything is ok
-// 0 if something wrong
-// don't forget gaberge collector
 int	ft_push(t_stack *stack, int value)
 {
 	t_node	*new_top;
@@ -56,7 +53,6 @@ void	ft_swap_rule(t_stack *stack)
 	stack->top = new_top;
 }
 
-// pop from stack1 and push in stack2
 void	ft_push_rule(t_stack *stack_1, t_stack *stack_2)
 {
 	t_node	*prev_top1;
