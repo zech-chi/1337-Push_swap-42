@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 10:40:30 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/29 23:35:25 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:23:53 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	count_words(char const *s, char c)
 	return (counter);
 }
 
-void	free_ptr(char **ptr, size_t size)
+static void	free_ptr(char **ptr, size_t size)
 {
 	size_t	row;
 

@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:19:04 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/29 23:33:03 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:25:46 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_stack_clear(t_stack *stack)
 	t_node	*cur_node;
 	t_node	*nxt_node;
 
-	if (stack || !(stack->top))
+	if (!stack || !(stack->top))
 		return ;
 	cur_node = stack->top;
 	while (cur_node)
@@ -28,6 +28,21 @@ void	ft_stack_clear(t_stack *stack)
 		cur_node = nxt_node;
 	}
 	stack->top = NULL;
+}
+
+void	ft_free_res(char **res)
+{
+	int	i;
+
+	if (!res)
+		return ;
+	i = 0;
+	while (res[i])
+	{
+		free(res[i]);
+		i++;
+	}
+	free(res);
 }
 
 void	ft_print_stack2(t_stack stack, char *name)

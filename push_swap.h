@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:33:13 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/29 23:15:52 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:26:27 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_reverse_rotate_rule(t_stack *stack);
 
 // ft_split.c
 char	**ft_split(char const *s, char c);
-void	free_ptr(char **ptr, size_t size);
 
 // push_swap_utils1.c
 void	ft_putstrnl_fd(char *s, int fd);
@@ -91,6 +90,10 @@ int		ft_get_min_great(t_stack stack_a, int b);
 int		ft_get_cost(t_from_b_to_a *info, t_stack stack_a, t_stack stack_b);
 void	ft_b_to_a_help(t_stack *stack_a, t_stack *stack_b, t_from_b_to_a *info);
 void	ft_from_b_to_a(t_stack *stack_a, t_stack *stack_b);
+
+// push_swap.c
+void	ft_stack_clear(t_stack *stack);
+void	ft_free_res(char **res);
 
 // to remove;
 void	ft_print_stack2(t_stack stack, char *name);

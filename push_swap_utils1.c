@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 10:37:49 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/29 23:35:37 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:27:41 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,27 @@ int	ft_is_valid_input(int ac, char **av, t_stack *stack_a)
 {
 	char	**res;
 	int		something_wrong;
-	int	row;
-	int	size;
+	int		row;
 	int		val;
 
 	while (--ac > 0)
 	{
 		res = ft_split(av[ac], ' ');
-		if (!res || !(*res))
+		if (!res)
 			return (0);
+		if (!(*res))
+			return (ft_free_res(res), 0);
 		row = 0;
 		while (res[row])
 			row++;
-		size = row;
 		while (--row >= 0)
 		{
 			val = ft_atoi_plus(res[row], &something_wrong);
 			if (something_wrong || ft_is_already_in_stack(*stack_a, val)
 				|| !ft_push(stack_a, val))
-				return (free_ptr(res, size), 0);
+				return (ft_free_res(res), 0);
 		}
-		free_ptr(res, size);
+		ft_free_res(res);
 	}
 	return (1);
 }
