@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:33:13 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/30 16:09:21 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:24:53 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void	ft_sort_3(t_stack *stack_a);
 int		ft_stack_is_sorted(t_stack stack_a);
 int		ft_is_already_in_stack(t_stack stack_a, int val);
 void	ft_applay_ra_rb(t_stack *stack_a, t_stack *stack_b, int ra, int rb);
+void	ft_applay_rra_rrb(t_stack *stack_a, t_stack *stack_b, int rra, int rrb);
+
+//push_swap_utils3.c
+void	ft_stack_clear(t_stack *stack);
+void	ft_free_res(char **res);
+void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
 
 // from_a_to_b.c
 void	ft_flag_lis_elements(t_stack *stack);
@@ -82,7 +88,6 @@ int		ft_get_max_lis(t_stack stack);
 int		ft_lis(t_stack *stack);
 void	ft_applay_best_lis(t_stack *stack_a);
 void	ft_from_a_to_b(t_stack *stack_a, t_stack *stack_b);
-void	ft_applay_rra_rrb(t_stack *stack_a, t_stack *stack_b, int rra, int rrb);
 
 // from_b_to_a.c
 int		ft_get_index_min(t_stack stack_a);
@@ -90,10 +95,5 @@ int		ft_get_min_great(t_stack stack_a, int b);
 int		ft_get_cost(t_from_b_to_a *info, t_stack stack_a, t_stack stack_b);
 void	ft_b_to_a_help(t_stack *stack_a, t_stack *stack_b, t_from_b_to_a *info);
 void	ft_from_b_to_a(t_stack *stack_a, t_stack *stack_b);
-
-// push_swap.c
-void	ft_stack_clear(t_stack *stack);
-void	ft_free_res(char **res);
-void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
 
 #endif
