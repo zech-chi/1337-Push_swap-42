@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:33:13 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/30 21:24:53 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:36:36 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_node
 {
@@ -95,5 +99,15 @@ int		ft_get_min_great(t_stack stack_a, int b);
 int		ft_get_cost(t_from_b_to_a *info, t_stack stack_a, t_stack stack_b);
 void	ft_b_to_a_help(t_stack *stack_a, t_stack *stack_b, t_from_b_to_a *info);
 void	ft_from_b_to_a(t_stack *stack_a, t_stack *stack_b);
+
+// get_next_line.c
+char	*get_next_line(int fd);
+
+// get_next_line_utils.c
+size_t	ft_strlen(char *str);
+char	*ft_strdup(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+void	shift_buff_or_clean_it(char *buff, size_t j);
+int		has_the_end(char *buff, char **line);
 
 #endif
