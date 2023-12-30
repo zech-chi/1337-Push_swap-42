@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:19:04 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/30 15:25:46 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 16:08:58 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,32 @@ void	ft_free_res(char **res)
 	free(res);
 }
 
-void	ft_print_stack2(t_stack stack, char *name)
+void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*cur_node;
+	int	index_min;
 
-	cur_node = stack.top;
-	if (!cur_node)
+	while (stack_a->len > 3)
 	{
-		printf("stack: %s is empty!!!\n\n", name);
-		return ;
+		index_min = ft_get_index_min(*stack_a);
+		if (index_min < stack_a->len - index_min)
+			ft_applay_ra_rb(stack_a, stack_b, index_min, 0);
+		else
+			ft_applay_rra_rrb(stack_a, stack_b, stack_a->len - index_min, 0);
+		ft_push_rule(stack_a, stack_b);
+		ft_putstrnl_fd("pb", 1);
 	}
-	printf("\n");
-	while (cur_node)
+	ft_sort_3(stack_a);
+	while (stack_b->len > 0)
 	{
-		printf("\n|  %d  |", cur_node->value);
-		if (!(cur_node->up))
-			printf(" top");
-		cur_node = cur_node->down;
+		ft_push_rule(stack_b, stack_a);
+		ft_putstrnl_fd("pa", 1);
 	}
-	printf(" tail\n");
-	printf("-------\t\n");
-	printf("stack: %s (len = %d)\n\n", name, stack.len);
+	if (stack_a->top->value > stack_a->top->down->value)
+	{
+		ft_swap_rule(stack_a);
+		ft_putstrnl_fd("sa", 1);
+	}
 }
-/////////////////////
 
 int	main(int ac, char **av)
 {
@@ -83,12 +86,17 @@ int	main(int ac, char **av)
 		ft_putstrnl_fd("Error", 2);
 		return (ft_stack_clear(&stack_a), 0);
 	}
-	if (stack_a.len == 3)
-		ft_sort_3(&stack_a);
-	else
+	if (!ft_stack_is_sorted(stack_a))
 	{
-		ft_from_a_to_b(&stack_a, &stack_b);
-		ft_from_b_to_a(&stack_a, &stack_b);
+		if (stack_a.len == 3)
+			ft_sort_3(&stack_a);
+		else if (stack_a.len == 4 || stack_a.len == 5)
+			ft_sort_5(&stack_a, &stack_b);
+		else
+		{
+			ft_from_a_to_b(&stack_a, &stack_b);
+			ft_from_b_to_a(&stack_a, &stack_b);
+		}
 	}
 	return (ft_stack_clear(&stack_a), 0);
 }

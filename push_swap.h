@@ -6,7 +6,7 @@
 /*   By: zech-chi <zech-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 19:33:13 by zech-chi          #+#    #+#             */
-/*   Updated: 2023/12/30 15:26:27 by zech-chi         ###   ########.fr       */
+/*   Updated: 2023/12/30 16:09:21 by zech-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void	ft_from_b_to_a(t_stack *stack_a, t_stack *stack_b);
 // push_swap.c
 void	ft_stack_clear(t_stack *stack);
 void	ft_free_res(char **res);
-
-// to remove;
-void	ft_print_stack2(t_stack stack, char *name);
+void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
 
 #endif
