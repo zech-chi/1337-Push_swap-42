@@ -6,9 +6,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-MAN = push_swap.c
+SMAN = push_swap.c
 
-BON = checker.c
+OMAN = $(SMAN:.c=.o)
+
+SBON = checker.c
+
+OBON = $(SBON:.c=.o)
 
 BONNAME = checker
 
@@ -24,11 +28,11 @@ SRCS = stack.c \
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME): $(OBJS) $(MAN)
-	$(CC) $(CFLAGS) $^ $(MAN) -o $@
+$(NAME): $(OBJS) $(OMAN)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(BONNAME): $(OBJS) $(BON)
-	$(CC) $(CFLAGS) $^ $(BON) -o $@
+$(BONNAME): $(OBJS) $(OBON)
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c push_swap.h 
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -36,7 +40,7 @@ $(BONNAME): $(OBJS) $(BON)
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(MAN:.c=.o) $(BON:.c=.o)
+	$(RM) $(OBJS) $(OMAN) $(OBON)
 
 fclean: clean
 	$(RM) $(NAME) $(BONNAME)
